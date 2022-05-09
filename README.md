@@ -1,6 +1,6 @@
 # Shoreline Terraform Pods OOM Op Pack
 
-This [Shoreline Op Pack](#what-are-shoreline-op-packs) contains a module to detect pods which have been terminated due to out-of-memory (OOM) error and sends a notification slack message with relevant debugging information.
+This [Shoreline Op Pack](#what-are-shoreline-op-packs) contains a module to detect Kubernetes pods which have been terminated due to out-of-memory (OOM) error and sends a notification Slack message with relevant debugging information.
 
 ## About Shoreline
 
@@ -38,7 +38,7 @@ Shoreline Op Packs are open-source collections of Terraform configurations and s
   </tbody>
 </table>
 
-The [Pods OOM Op Pack] (https://registry.terraform.io/modules/terraform-shoreline-modules/pods-oom/shoreline/latest/submodules/pod-oom) monitors kubernetes pods. Whenever any pod on cluster restart with oom on node, pods details are automatically collected and pushed to slack chnanel using incoming webhook.
+The [Pods OOM Op Pack](https://registry.terraform.io/modules/terraform-shoreline-modules/pods-oom/shoreline/latest/submodules/pod-oom) monitors Kubernetes pods. Whenever any pod restarts due to node OOM, the pod details are automatically collected and pushed to a user-defined Slack channel via an incoming webhook.
 
 Collected data includes:
 
@@ -47,7 +47,6 @@ Collected data includes:
 1. Node Name
 1. Terminated Time
 1. Pod Logs
-
 
 ## Additional resources
 

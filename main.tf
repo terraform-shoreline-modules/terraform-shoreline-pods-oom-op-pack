@@ -18,15 +18,15 @@ terraform {
   #}
 }
 
-# Example instantiation of the Pods OOM OpPack:
+# Example instantiation of the Pods OOM Op Pack:
 module "pods_oom_example" {
   source = "./modules/pods-oom/"
   prefix = "pods_oom_"
   resource_query = "host| pods | app='shoreline'"
-# check more frequently to speed up test
+  # check more frequently to speed up test
   check_interval = 60
   script_path = "/agent/scripts"
-# https://slack.com/help/articles/115005265063-Incoming-webhooks-for-Slack#set-up-incoming-webhooks
+  # https://slack.com/help/articles/115005265063-Incoming-webhooks-for-Slack#set-up-incoming-webhooks
   slack_url = "https://hooks.slack.com/services/[insert webhook url]"
   aggregation_time = 60
 }

@@ -10,24 +10,24 @@ variable "resource_query" {
 
 variable "check_interval" {
   type        = number
-  description = "Frequency, in seconds, to check the oom pods on node."
+  description = "Frequency, in seconds, to check the OOM pods on nodes."
   default     = 60
 }
 
 variable "script_path" {
   type        = string
-  description = "Destination (on selected resources) for the check, and stack-dump scripts."
+  description = "Destination (on selected Resources) to store shell scripts."
   default     = "/agent/scripts"
 }
 
 variable "aggregation_time" {
   type        = number
-  description = "Period of time in seconds for that oom pods are checked."
+  description = "Period of time, in seconds, that OOM pods are checked."
   default     = 120
 }
 
 variable "slack_url" {
   type = string
   # https://slack.com/help/articles/115005265063-Incoming-webhooks-for-Slack#set-up-incoming-webhooks
-  description = "Slack incoming webhook URL where oom pods details will be send."
+  description = "Incoming Slack webhook URL where OOM pods details are sent."
 }
