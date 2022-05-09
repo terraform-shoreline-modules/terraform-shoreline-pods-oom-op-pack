@@ -20,7 +20,7 @@
   </tbody>
 </table>
 
-The Pods OOM Op Pack monitors kubernetes pods. Whenever any pod on cluster restart with oom on node, pods details are automatically collected and pushed to slack chnanel using incoming webhook.
+The [Pods OOM Op Pack](https://registry.terraform.io/modules/terraform-shoreline-modules/pods-oom/shoreline/latest/submodules/pod-oom) monitors Kubernetes pods. Whenever any pod restarts due to node OOM, the pod details are automatically collected and pushed to a user-defined Slack channel via an incoming webhook.
 
 Collected data includes:
 
@@ -32,7 +32,7 @@ Collected data includes:
 
 ## Usage
 
-The following example monitors all pods in cluster. Whenever a pod's have oom event it sends pods details to slack channel using incoming webhook URL.
+The following example monitors all pods in the cluster. Whenever an OOM event occurs, Shoreline sends pod details to the specified Slack channel.
 
 ```hcl
 terraform {
@@ -58,20 +58,20 @@ module "pods-oom" {
   # Frequency to evaluate alarm conditions in seconds
   check_interval = 60
 
-  # http endpoint of slack incoming webhook.
+  # Incoming Slack webhook URL where OOM pods details are sent
   # https://slack.com/help/articles/115005265063-Incoming-webhooks-for-Slack#set-up-incoming-webhooks
   slack_url = "https://hooks.slack.com/services/[insert webhook url]"
 
-  # Time in seconds for that oom pods are checked.
+  # Period of time, in seconds, that OOM pods are checked.
   aggregation_time = 60
 
-  # Prefix to allow multiple instances of the module, with different params
+  # A prefix to isolate multiple instances of the module with different parameters
   prefix = "pods_oom_example_"
 
   # Resource query to select the affected resources
   resource_query = "pods | app='shoreline'"
 
-  # Destination of the oom-pods, and update slack scripts on the selected resources
+  # Destination (on selected Resources) to store shell scripts
   script_path = "/tmp"
 
 }
@@ -83,7 +83,7 @@ These commands use Shoreline's expressive [Op language](https://docs.shoreline.i
 
 -> These commands can be executed within the [Shoreline CLI](https://docs.shoreline.io/installation#cli) or [Shoreline Notebooks](https://docs.shoreline.io/ui/notebooks).
 
-### Force data collection for a given time range.
+### Force data collection for a given time range
 
 ```
 op> pods | app='shoreline' | pods_oom_oom_pods_counts('600')
@@ -97,7 +97,7 @@ op> pods | app='shoreline' | pods_oom_oom_pods_counts('600')
 op> pods | app='shoreline' | limit=1 | pods_oom_oom_pods_counts('60')
 ```
 
-### Manually check oom pods on a set of nods
+### Manually check OOM pods on a set of nodes
 
 ```
 op> pods | app='shoreline' | pods_oom_oom_pods_counts('60')
@@ -107,7 +107,7 @@ op> pods | app='shoreline' | pods_oom_oom_pods_counts('60')
  77  | CONTAINER | shoreline2.shoreline-4jkfc.shoreline | us-west-2 | us-west-2c |   0    | 0
      |           |                                      |           |            |        |
 ```
-### List triggered Pods OOM Alarms
+### List triggered pod OOM Alarms
 
 ```
 op> events | alarm_name =~ 'oom'
